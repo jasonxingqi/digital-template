@@ -21,6 +21,9 @@ window.onload = function() {
         game.load.image('ground', 'assets/platform.png');
         game.load.image('star', 'assets/star.png');
         game.load.spritesheet('dude', 'assets/dude.png', 32, 48);
+
+        // sound effect
+        game.load.audio('sfx', 'assets/fx_mixdown.ogg');
     }
     
     var player;
@@ -31,7 +34,10 @@ window.onload = function() {
     var score = 0;
     var scoreText;
     
+    var fx;
+
     function create() {
+
         //  We're going to be using physics, so enable the Arcade Physics system
         game.physics.startSystem(Phaser.Physics.ARCADE);
 
@@ -99,6 +105,12 @@ window.onload = function() {
 
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
+
+        // set-up audio sprite
+        fx = game.add.audio('sfx');
+        fx.allowMultiple = true;
+        // add this defines the markers
+        fx.addMarker('ping', 10, 1.0);
     }
     
     function update() {
@@ -139,6 +151,7 @@ window.onload = function() {
         if (cursors.up.isDown && player.body.touching.down)
         {
             player.body.velocity.y = -350;
+
         }
     }
 
@@ -146,6 +159,9 @@ window.onload = function() {
     
     // Removes the star from the screen
     star.kill();
+
+    // add sound effect
+    fx.play('ping');
 
     //  Add and update the score
     score += 10;
