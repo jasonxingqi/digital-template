@@ -106,6 +106,9 @@ window.onload = function() {
         //  Our controls.
         cursors = game.input.keyboard.createCursorKeys();
 
+        // mouse controls
+        game.input.onDown.add(press, this);
+
         // set-up audio sprite
         fx = game.add.audio('sfx');
         fx.allowMultiple = true;
@@ -157,15 +160,22 @@ window.onload = function() {
 
     function collectStar (player, star) {
     
-    // Removes the star from the screen
-    star.kill();
+        // Removes the star from the screen
+        star.kill();
 
-    // add sound effect
-    fx.play('ping');
+        // add sound effect
+        fx.play('ping');
 
-    //  Add and update the score
-    score += 10;
-    scoreText.text = 'Score: ' + score;
+        //  Add and update the score
+        score += 10;
+        scoreText.text = 'Score: ' + score;
 
+    }
+
+    function press() {
+        if (game.input.mouse.button==0 && player.body.touching.down) {
+            player.body.velocity.y = -350;            
+        };
+        
     }
 };
