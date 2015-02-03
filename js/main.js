@@ -25,6 +25,7 @@ window.onload = function() {
         // sound effect
         game.load.audio('sfx', 'assets/fx_mixdown.ogg');
         game.load.audio('sbk', 'assets/SuperMarioBros.ogg');
+        game.load.audio('sjp', 'assets/SE4_P_PKYO_JUMP1.ogg');
     }
     
     var player;
@@ -37,6 +38,7 @@ window.onload = function() {
     
     var fx;
     var bk;
+    var jp;
 
     function create() {
 
@@ -120,6 +122,10 @@ window.onload = function() {
         bk = game.add.audio('sbk');
         bk.loop = true;
         bk.play();
+
+        jp = game.add.audio('sjp');
+        bk.loop = true;
+
     }
     
     function update() {
@@ -160,6 +166,7 @@ window.onload = function() {
         if (cursors.up.isDown && player.body.touching.down)
         {
             player.body.velocity.y = -350;
+            jp.play();
 
         }
     }
@@ -180,7 +187,9 @@ window.onload = function() {
 
     function press() {
         if (game.input.mouse.button==0 && player.body.touching.down) {
-            player.body.velocity.y = -350;            
+            player.body.velocity.y = -350;   
+            jp.play();
+         
         };
         
     }
