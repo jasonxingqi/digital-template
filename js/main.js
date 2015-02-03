@@ -26,6 +26,7 @@ window.onload = function() {
         game.load.audio('sfx', 'assets/fx_mixdown.ogg');
         game.load.audio('sbk', 'assets/SuperMarioBros.ogg');
         game.load.audio('sjp', 'assets/SE4_P_PKYO_JUMP1.ogg');
+        game.load.audio('scc', 'assets/Course_Clear.mp3');
     }
     
     var player;
@@ -39,6 +40,7 @@ window.onload = function() {
     var fx;
     var bk;
     var jp;
+    var cc;
 
     function create() {
 
@@ -124,7 +126,10 @@ window.onload = function() {
         bk.play();
 
         jp = game.add.audio('sjp');
-        bk.loop = true;
+        //bk.loop = true;
+
+        cc = game.add.audio('scc');
+        //cc.loop = true;
 
     }
     
@@ -169,6 +174,8 @@ window.onload = function() {
             jp.play();
 
         }
+
+
     }
 
     function collectStar (player, star) {
@@ -183,13 +190,17 @@ window.onload = function() {
         score += 10;
         scoreText.text = 'Score: ' + score;
 
+        if (score == 100) {
+            bk.stop();
+            cc.play();
+        }
+
     }
 
     function press() {
         if (game.input.mouse.button==0 && player.body.touching.down) {
             player.body.velocity.y = -350;   
-            jp.play();
-         
+            jp.play();         
         };
         
     }
