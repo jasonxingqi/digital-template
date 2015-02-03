@@ -24,6 +24,7 @@ window.onload = function() {
 
         // sound effect
         game.load.audio('sfx', 'assets/fx_mixdown.ogg');
+        game.load.audio('sbk', 'assets/SuperMarioBros.ogg');
     }
     
     var player;
@@ -35,6 +36,7 @@ window.onload = function() {
     var scoreText;
     
     var fx;
+    var bk;
 
     function create() {
 
@@ -114,6 +116,10 @@ window.onload = function() {
         fx.allowMultiple = true;
         // add this defines the markers
         fx.addMarker('ping', 10, 1.0);
+
+        bk = game.add.audio('sbk');
+        bk.loop = true;
+        bk.play();
     }
     
     function update() {
